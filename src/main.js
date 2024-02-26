@@ -1,6 +1,6 @@
 import jsPDF from "jspdf";
 import API from "./api";
-import { TaskPool } from "./util";
+import { getCookie, TaskPool } from "./util";
 
 const url = new URL(window.location.href);
 
