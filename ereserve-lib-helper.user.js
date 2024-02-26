@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         EReserves Lib Helper
 // @namespace    https://github.com/hotwords123/ereserves-lib-helper
-// @version      0.1.0
+// @version      0.1.1
 // @author       hotwords123
 // @description  Download textbooks from Tsinghua EReserves
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=www.tsinghua.edu.cn
@@ -46,6 +46,16 @@
       });
       return this.handleJson(await resp.json());
     }
+  }
+  function getCookie(name) {
+    const cookies = document.cookie.split("; ");
+    for (const cookie of cookies) {
+      const [key, value] = cookie.split("=").map(decodeURIComponent);
+      if (key === name) {
+        return value;
+      }
+    }
+    return null;
   }
   class TaskPool {
     constructor(maxTasks) {
