@@ -1,15 +1,16 @@
 // ==UserScript==
 // @name         EReserves Lib Helper
 // @namespace    https://github.com/hotwords123/ereserves-lib-helper
-// @version      0.1.1
+// @version      0.1.2
 // @author       hotwords123
 // @description  Download textbooks from Tsinghua EReserves
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=www.tsinghua.edu.cn
 // @match        http://ereserves.lib.tsinghua.edu.cn/readkernel/ReadJPG/JPGJsNetPage/*
-// @require      https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js
+// @match        https://ereserves.lib.tsinghua.edu.cn/readkernel/ReadJPG/JPGJsNetPage/*
+// @require      https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js
 // ==/UserScript==
 
-(function (jsPDF) {
+(function (jspdf) {
   'use strict';
 
   class API {
@@ -139,7 +140,7 @@
       }
       showFeedback(`准备下载：${bookName}`);
       const pool = new TaskPool(8);
-      const doc = new jsPDF({
+      const doc = new jspdf.jsPDF({
         unit: "px",
         putOnlyUsedFonts: true,
         compress: true,
@@ -170,7 +171,7 @@
           const page = chapter.JGPS[i];
           const data = await page.task;
           delete page.task;
-          const { width, height } = jsPDF.API.getImageProperties(data);
+          const { width, height } = jspdf.jsPDF.API.getImageProperties(data);
           doc.addPage([width, height], width > height ? "l" : "p");
           doc.addImage(data, "JPEG", 0, 0, width, height);
           const pageNumber = doc.getNumberOfPages();
