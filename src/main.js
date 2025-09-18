@@ -1,4 +1,4 @@
-import jsPDF from "jspdf";
+import { jsPDF } from "jspdf";
 import API from "./api";
 import { getCookie, TaskPool } from "./util";
 
