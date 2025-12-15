@@ -31,10 +31,12 @@ function initDownloader() {
     }
 
     working = true;
-    window.onbeforeunload = (evt) => {
+
+    const beforeUnloadHandler = (evt) => {
       evt.preventDefault();
       evt.returnValue = "下载中，确定要离开吗？";
     };
+    window.addEventListener("beforeunload", beforeUnloadHandler);
 
     try {
       await handleDownload();
@@ -43,7 +45,7 @@ function initDownloader() {
       showFeedback("下载失败：" + err.message);
     } finally {
       working = false;
-      window.onbeforeunload = null;
+      window.removeEventListener("beforeunload", beforeUnloadHandler);
     }
   });
 
