@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         EReserves Lib Helper
 // @namespace    https://github.com/hotwords123/ereserves-lib-helper
-// @version      0.1.2
+// @version      0.2.0
 // @author       hotwords123
 // @description  Download textbooks from Tsinghua EReserves
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=www.tsinghua.edu.cn
 // @match        http://ereserves.lib.tsinghua.edu.cn/readkernel/ReadJPG/JPGJsNetPage/*
 // @match        https://ereserves.lib.tsinghua.edu.cn/readkernel/ReadJPG/JPGJsNetPage/*
-// @require      https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js
+// @require      https://cdn.jsdelivr.net/npm/jspdf@3.0.4/dist/jspdf.umd.min.js
 // ==/UserScript==
 
 (function (jspdf) {
@@ -95,10 +95,9 @@
     initDownloader();
   }
   function initDownloader() {
-    var _a, _b, _c;
-    const bookId = (_a = document.querySelector("#bookId")) == null ? void 0 : _a.value;
-    const bookName = (_b = document.querySelector("#bookname")) == null ? void 0 : _b.value;
-    const scanId = (_c = document.querySelector("#scanid")) == null ? void 0 : _c.value;
+    const bookId = document.querySelector("#bookId")?.value;
+    const bookName = document.querySelector("#bookname")?.value;
+    const scanId = document.querySelector("#scanid")?.value;
     const token = getCookie("BotuReadKernel");
     if (!bookId || !bookName || !scanId || !token) {
       alert("无法获取书籍信息");
@@ -113,10 +112,11 @@
         return;
       }
       working = true;
-      window.onbeforeunload = (evt) => {
+      const beforeUnloadHandler = (evt) => {
         evt.preventDefault();
         evt.returnValue = "下载中，确定要离开吗？";
       };
+      window.addEventListener("beforeunload", beforeUnloadHandler);
       try {
         await handleDownload();
       } catch (err) {
@@ -124,7 +124,7 @@
         showFeedback("下载失败：" + err.message);
       } finally {
         working = false;
-        window.onbeforeunload = null;
+        window.removeEventListener("beforeunload", beforeUnloadHandler);
       }
     });
     function showFeedback(text) {
