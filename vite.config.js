@@ -8,7 +8,7 @@ export default defineConfig({
       entry: "src/main.js",
       userscript: {
         name: "EReserves Lib Helper",
-        version: "0.1.2",
+        version: "0.2.0",
         description: "Download textbooks from Tsinghua EReserves",
         author: "hotwords123",
         icon: "https://www.google.com/s2/favicons?sz=64&domain=www.tsinghua.edu.cn",
