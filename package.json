@@ -13,6 +13,6 @@
     "vite-plugin-monkey": "^3.5.1"
   },
   "dependencies": {
-    "jspdf": "^4.0.0"
+    "jspdf": "^4.1.0"
   }
 }
