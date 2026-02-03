@@ -7,7 +7,7 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=www.tsinghua.edu.cn
 // @match        http://ereserves.lib.tsinghua.edu.cn/readkernel/ReadJPG/JPGJsNetPage/*
 // @match        https://ereserves.lib.tsinghua.edu.cn/readkernel/ReadJPG/JPGJsNetPage/*
-// @require      https://cdn.jsdelivr.net/npm/jspdf@3.0.4/dist/jspdf.umd.min.js
+// @require      https://cdn.jsdelivr.net/npm/jspdf@4.0.0/dist/jspdf.umd.min.js
 // ==/UserScript==
 
 (function (jspdf) {
